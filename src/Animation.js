@@ -27,7 +27,6 @@ export default class Animation extends Component {
     radius: 20
   };
   handleMouseMove = e => {
-if (e.nativeEvent.offsetX <= 0 || e.nativeEvent.offsetY <= 0) return
       this.setState({
 
         mouseX: e.nativeEvent.offsetX,
@@ -37,7 +36,7 @@ if (e.nativeEvent.offsetX <= 0 || e.nativeEvent.offsetY <= 0) return
   componentDidMount() {
     this.ticker = setInterval(() => {
       this.tick();
-    }, 200);
+    }, 18);
     console.log('mounted')
     
   }
