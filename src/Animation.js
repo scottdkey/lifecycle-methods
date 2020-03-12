@@ -27,23 +27,21 @@ export default class Animation extends Component {
     radius: 20
   };
   handleMouseMove = e => {
-    this.setState({
-      mouseX: e.nativeEvent.offsetX,
-      mouseY: e.nativeEvent.offsetY
-    });
+if (e.nativeEvent.offsetX <= 0 || e.nativeEvent.offsetY <= 0) return
+      this.setState({
+
+        mouseX: e.nativeEvent.offsetX,
+        mouseY: e.nativeEvent.offsetY
+      });
   };
-  componentWillMount() {
+  componentDidMount() {
     this.ticker = setInterval(() => {
       this.tick();
-    }, 50);
+    }, 200);
+    console.log('mounted')
     
   }
-  mousePosition = () => {
-    this.setState({
-      mouseX: this.mouseX,
-      mouseY: this.mouseY
-    });
-  };
+
   componentDidUpdate(prevProps, prevState) {
     // if (prevState.xPos < 0){
     //   //do things
@@ -78,13 +76,7 @@ export default class Animation extends Component {
         yPos: 1,
         ballColor: colorRandom()
       });
-    }
-    //  if (prevState.yPos === this.state.mouseY){
-    //    this.setState({
-    //      dy: -(this.state.dy)
-    //    })
-    //  }
-  }
+    }  }
   bounce = () => {};
 
   tick() {
@@ -109,8 +101,6 @@ export default class Animation extends Component {
       <div
         style={{ width, height }}
         onMouseMove={this.handleMouseMove}
-        onMouseEnter={this.handleMouseEnter}
-        onMouseLeave={this.handleMouseLeave}
       >
         <div
           style={{ ...styles.container, backgroundColor: color, width, height }}
@@ -131,8 +121,8 @@ export default class Animation extends Component {
           <div
             style={{
               ...styles.player,
-              left: mouseX,
-              top: mouseY,
+              left: mouseX +20,
+              top: mouseY +20,
               backgroundColor: "purple"
             }}
           ></div>
